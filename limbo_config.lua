@@ -109,33 +109,36 @@ end
 apikey = "6676696e47f3c93327ec1a4aacf98697f565fcccf4ed0438a93c63f755c5c8252443defba037458fb5270492dc018264"
                                                                                                                             
 currency = "usdt"                                                         
-chance= 1.07
-base= 0.00000000
-bethigh = true
-randomHighLow = false
-multiplier = 1
-nextbet = base  
-curbet = base
-basemultiplier = 0.00075
-function dobet()
-base= (balance - (profit * 3)) * basemultiplier 
-chance = 1.07 + (currentstreak * (basemultiplier * 1.3))
 
-if win then
-	nextbet = previousbet* multiplier
-	if currentstreak%5 then
-	nextbet = base
-	end
-    else
-        if currentstreak==-6 then
-         curbet = base
+chance      = 69
+if_win      = 1.01
+if_lose     = 1.37
+base        = 0.00001055
+chanceAwal  = 40
+chanceAkhir = 49
+if_profit   = 0.00000001
+
+wincount = 0
+profit1  = 0
+nextbet  = base
+--resetstats()
+function dobet()
+    chance = math.random(chanceAwal*100.0, chanceAkhir*100.0)/100.0
+
+    if win then
+        wincount=wincount+1
+        if (profit > (profit1 + if_profit)) then
+            wincount = 0
+            profit1 = profit
+            nextbet  = base
+            chance = math.random(98,99)
         else
-          curbet = base
+            nextbet = previousbet*if_win
         end
-        nextbet = base
+        
+    else
+        wincount = 0
+        nextbet  = previousbet*if_lose
     end
 
-if (randomHighLow) then
-  if (math.random() < .1137) then bethigh = !bethigh end
-  end
-  end
+end
