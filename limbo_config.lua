@@ -109,21 +109,33 @@ end
 apikey = "6676696e47f3c93327ec1a4aacf98697f565fcccf4ed0438a93c63f755c5c8252443defba037458fb5270492dc018264"
                                                                                                                             
 currency = "usdt"                                                         
-chance = 81.12
+chance= 1.07
+base= 0.00000000
 bethigh = true
-basebet = 0.00001
-nextbet = basebet
-
+randomHighLow = false
+multiplier = 1
+nextbet = base  
+curbet = base
+basemultiplier = 0.00075
 function dobet()
-	if (win) then
-		chance = 81.12
-   		nextbet = basebet
-	else
-		if chance == 33.33  then
-			nextbet = previousbet * 1.59738
-		else
-			chance = 33.33
-   			nextbet = basebet/3.3
-		end
+base= (balance - (profit * 3)) * basemultiplier 
+chance = 1.07 + (currentstreak * (basemultiplier * 1.3))
+
+if win then
+	nextbet = previousbet* multiplier
+	if currentstreak%5 then
+	nextbet = base
 	end
-end
+    else
+        if currentstreak==-6 then
+         curbet = base
+        else
+          curbet = base
+        end
+        nextbet = base
+    end
+
+if (randomHighLow) then
+  if (math.random() < .1137) then bethigh = !bethigh end
+  end
+  end
