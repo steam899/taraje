@@ -106,76 +106,24 @@ function fibonacci(level)
     return _start * basebet                                                                                                                                                                                                                                          
 end
 
-apikey = "b7bc4e0b4a9ae7fad9b0630a9e34c45869f3b1816b25a4a90283390eb4ea7f9>
+apikey = "6676696e47f3c93327ec1a4aacf98697f565fcccf4ed0438a93c63f755c5c8252443defba037458fb5270492dc018264"
                                                                                                                             
 currency = "usdt"                                                         
-basebet = 0.00001000;
-nextbet = 0.00001000;
-bb = 0.00090000;
-bb6 = 0.00900000;
-pbet = 0.00090000;
-pbet3 = 0.00900000;
-pb3 = 1;
-pb = 1;
-pbb3 = 0;
-pbb = 0;
-nb = 0;
-chance = 62;
-profittarget = 10.008;
+chance = 81.12
+bethigh = true
+basebet = 0.00001
+nextbet = basebet
 
-function dobet() {
-
-if (balance >= profittarget)
-stop();
-
-if (pbb3 == 1)
-pbb3 = 0;
-
-if (pbb == 1)
-pbb = 0;
-
-if (win && chance == 38) {
-pb3 = 1;
-pbb3 = 1;
-} else if (chance == 38 && pbb3 == 0) {
-pb3 = 0;
-}
-
-if (win && chance == 62) {
-pb = 1;
-pbb = 1;
-} else if (chance == 62 && pbb == 0){
-pb = 0;
-}
-
-if (chance == 62 && pb == 0 ) {
-pbet = pbet*3;
-} else if (chance == 62 && pb == 1) {
-pbet = bb6;
-}
-
-if (chance == 38 && pb3 == 0) {
-pbet3 = pbet3*1.7;
-} else if (chance == 38 && pb3 == 1) {
-pbet3 = bb;
-}
-
-if (chance >= 62) {
-chance = 38;
-nb = 1;
-bethigh = true;
-} else {
-chance = 62;
-nb = 2;
-bethigh = false;
-}
-
-if (nb == 1) {
-nextbet = pbet3;
-nb = 2;
-} else if (nb == 2) {
-nextbet = pbet;
-nb = 1;
-}
-
-}
+function dobet()
+	if (win) then
+		chance = 81.12
+   		nextbet = basebet
+	else
+		if chance == 33.33  then
+			nextbet = previousbet * 1.59738
+		else
+			chance = 33.33
+   			nextbet = basebet/3.3
+		end
+	end
+end
